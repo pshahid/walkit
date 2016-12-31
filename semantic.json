@@ -1,0 +1,22 @@
+{
+  "base": "",
+  "paths": {
+    "source": {
+      "config": "src/theme.config",
+      "definitions": "src/definitions/",
+      "site": "src/site/",
+      "themes": "src/themes/"
+    },
+    "output": {
+      "packaged": "app/styles/",
+      "uncompressed": "app/styles/components/",
+      "compressed": "app/styles/components/",
+      "themes": "app/styles/themes/"
+    },
+    "clean": "dist/"
+  },
+  "permission": false,
+  "autoInstall": true,
+  "rtl": false,
+  "version": "2.2.7"
+}
