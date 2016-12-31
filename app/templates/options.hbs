@@ -1,9 +1,15 @@
 <div class="ui middle aligned center aligned row">
     <div class="column">
         <div class="ui blue buttons">
-            <button class="ui massive button">Random</button>
-            <button class="ui massive button">Search</button>
-            <button class="ui massive button">Discover</button>
+            {{#link-to 'random-walk' classNames='ui massive button'}}
+                Random
+            {{/link-to}}
+            {{#link-to 'search-subreddits' classNames='ui massive button'}}
+                Search
+            {{/link-to}}
+            {{#link-to 'discover-subreddits' classNames='ui massive button'}}
+                Discover
+            {{/link-to}}
         </div>
     </div>
 {{outlet}}

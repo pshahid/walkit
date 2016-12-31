@@ -9,6 +9,9 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('about');
   this.route('options');
+  this.route('random-walk');
+  this.route('search-subreddits');
+  this.route('discover-subreddits');
 });
 
 export default Router;
