@@ -13,6 +13,24 @@ App = Ember.Application.extend({
   Resolver
 });
 
+Ember.onerror = function(error) {
+    console.log("Ember error");
+    console.log(error);
+    console.log(error.stack);
+    Ember.assert(false, error);
+}
+Ember.RSVP.on('error', function(error) {
+  console.log(error.message);
+  console.log(error.stack);
+  Ember.assert(false, error);
+});
+
+Ember.RSVP.configure('onerror', function(e) {
+  console.log(e.message);
+  console.log(e.stack);
+  Ember.assert(false, e);
+});
+
 loadInitializers(App, config.modulePrefix);
 
 export default App;

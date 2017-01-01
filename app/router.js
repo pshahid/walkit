@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('random-walk');
   this.route('search-subreddits');
   this.route('discover-subreddits');
+  this.route('random');
 });
 
 export default Router;

@@ -18,13 +18,22 @@ let subreddits = [
         name: 'blep',
         url: 'https://reddit.com/r/blep',
         description: 'r/blep is a subreddit dedicated to animals blepping.'
+    },
+    {
+        id: 4,
+        name: 'indoor gardening',
+        url: 'https://reddit.com/r/indoorgardening',
+        description: 'A community for indoor gardeners'
     }
 ];
 
-export default Ember.Route.extend({
-    model() {
+export default Ember.Service.extend({
+    all() {
+        console.log("Get all");
+    },
+    random() {
         const length = subreddits.length;
-        const item = Math.floor(Math.random() * length);
-        return subreddits[item];
+        const index = Math.floor(Math.random() * length);
+        return subreddits[index];
     }
 });
