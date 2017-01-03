@@ -1,7 +1,14 @@
 <div class="ui row">
-    <span>Name: {{subreddit.name}}</span><br/>
-    <span>URL: {{subreddit.url}}</span><br/>
-    <span>Description: {{subreddit.description}}</span>
+    <div class="ui items">
+        <div class="item">
+            <div class="content">
+                <a href="{{subreddit.url}}" class="header">r/{{subreddit.name}}</a>
+                <div class="description">
+                    <p>{{subreddit.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="ui row">
     <button {{action "getSubreddit"}} class="ui massive violet button">Random Subreddit</button>
