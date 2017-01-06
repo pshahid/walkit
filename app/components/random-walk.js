@@ -6,7 +6,6 @@ export default Ember.Component.extend({
     actions: {
         getSubreddit() {
             const randomsvc = this.get('random');
-            // console.log(randomsvc);
             this.set('subreddit', randomsvc.random());
         }
     }
