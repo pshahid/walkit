@@ -13,7 +13,6 @@ class VisitorError(Exception):
     pass
 
 
-
 def crawled(reddit):
     """ Begin crawling the entire site starting from defaults """
     for default in reddit.subreddits.default():
