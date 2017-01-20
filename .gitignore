@@ -16,4 +16,5 @@
 npm-debug.log*
 testem.log
 praw.ini
+db.ini
 __pycache__
