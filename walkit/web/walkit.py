@@ -2,19 +2,18 @@ from flask import Flask, g
 from flask_restful import Api
 
 from .models import db
-from .api import SubredditResource
+from .api import SubredditResource, SubredditList
 import configparser
 
 
-def get_config(type='development'):
+def get_config(cfgtype='development'):
     config = configparser.ConfigParser()
     config.read('db.ini')
-    print(config)
-    cfg = config[type]
+    cfg = config[cfgtype]
     return 'postgresql://{0}:{1}@{2}:{3}/{4}'.format(cfg['username'], cfg['password'],
                                                    cfg['hostname'], cfg['port'], cfg['database'])
 
-db_uri = get_config(type='development')
+db_uri = get_config(cfgtype='development')
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
 db.init_app(app)
@@ -28,4 +27,5 @@ api = Api(app)
 def index():
     return ""
 
-api.add_resource(SubredditResource, '/subreddit/')
+api.add_resource(SubredditList, '/subreddits')
+api.add_resource(SubredditResource, '/subreddits/<string:name>')
