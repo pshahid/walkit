@@ -17,11 +17,13 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from tastypie.api import Api
 
-from web.api import SubredditResource
+from web.api import SubredditResource, SubredditLinkResource
 
 subreddit_resource = SubredditResource()
+subreddit_links_resource = SubredditLinkResource()
 v1_api = Api(api_name='v1')
 v1_api.register(subreddit_resource)
+v1_api.register(subreddit_links_resource)
 
 urlpatterns = [
     url(r'^web/', include('web.urls')),
