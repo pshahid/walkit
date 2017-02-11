@@ -2,15 +2,12 @@ from datetime import datetime
 import requests
 import praw
 from ingest.crawler import crawled
+from ingest.requestors import AuthenticatedRequestor
 
 INI_NAME = 'walkit_backend'
 USER_AGENT_STR = 'walkit - gathering a subreddit list'
 HOSTNAME = 'localhost'
 PORT = ':8000'
-
-
-def mine_if_outdated(subreddit):
-    pass
 
 
 def add_if_absent(**kwargs):
@@ -31,13 +28,13 @@ def add_if_absent(**kwargs):
         print(response.status_code)
         print(response.content)
 
+
 def main():
     reddit = praw.Reddit(INI_NAME, user_agent=USER_AGENT_STR)
-    assert reddit.user.me()
-    for results in crawled(reddit):
+    assert reddit.user.me()  # We logged in?
+    requestor = AuthenticatedRequestor(context=reddit)  # Our own adapter around PRAW
+    for results in crawled(requestor.defaults(), requestor.about):
         add_if_absent(**results)
-        for related in results['related']:
-            mine_if_outdated(related)
 
 
 if __name__ == '__main__':

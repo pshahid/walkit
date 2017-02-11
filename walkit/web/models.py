@@ -19,3 +19,6 @@ class Subreddit(models.Model):
 class SubredditLink(models.Model):  # A self-referential MxM through model; TODO later
     from_subreddit = models.ForeignKey(Subreddit, related_name='from_subreddits')
     to_subreddit = models.ForeignKey(Subreddit, related_name='to_subreddits')
+
+    class Meta:
+        unique_together = ("from_subreddit", "to_subreddit")
