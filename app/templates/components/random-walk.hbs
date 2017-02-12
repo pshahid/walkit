@@ -2,9 +2,12 @@
     <div class="ui items">
         <div class="item">
             <div class="content">
-                <a href="{{subreddit.url}}" class="header">r/{{subreddit.name}}</a>
+                <a href="http://reddit.com/r/{{subreddit.name}}" target="_blank" class="header">r/{{subreddit.name}}</a>
                 <div class="description">
-                    <p>{{subreddit.description}}</p>
+                    <p>{{subreddit.public_description}}</p>
+                    <div class="meta">
+                        <span class="subs">{{subreddit.subscribers}} subscribers</span>
+                    </div>
                 </div>
             </div>
         </div>
