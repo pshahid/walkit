@@ -7,10 +7,8 @@ export default Ember.Service.extend({
     seen: new Set(),
     init() {
         this._super(...arguments);
-        // this.meta();
     },
     meta(cb) {
-        console.log("Meta");
         var self = this;
         Ember.$.getJSON("http://localhost:8000/api/v1/subreddit?format=json").then(function(args) {
             self.set('total', args.meta.total_count);
@@ -21,7 +19,6 @@ export default Ember.Service.extend({
         console.log("Get all");
     },
     _random(cb) {
-        console.log("_random");
         const length = this.get('total');
         var seen = this.get('seen');
         var index = 0;
@@ -37,7 +34,6 @@ export default Ember.Service.extend({
         });
     },
     _ensure_total(cb) {
-        console.log("_ensure_total");
         const total = this.get('total');
         if (!total) {
             this.meta(this._random.bind(this, cb));
