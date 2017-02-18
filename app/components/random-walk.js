@@ -7,6 +7,20 @@ export default Ember.Component.extend({
         this._super(...arguments);
         this.next();
     },
+    didRender() {
+        // Ember.$(document).keyUp(function(e) {
+            // console.log("key up on document ", e);
+        // });
+    },
+    didInsertElement() {
+        var self = this;
+        $(document).on('keyup', {_self: this}, function(e) {
+            self.keyUp(e);
+        });
+    },
+    willDestroyElement() {
+        $(document).off('keyup');
+    },
     setSubreddit(subreddit) {
         this.set('subreddit', subreddit);
     },
@@ -19,7 +33,7 @@ export default Ember.Component.extend({
         const last = historysvc.back();
         this.set('subreddit', last);
     },
-    keyUp: function(e) {
+    keyUp(e) {
         if (e.which === 39) {
             this.next();
         }
