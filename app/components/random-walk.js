@@ -26,11 +26,12 @@ export default Ember.Component.extend({
         this.set('subreddit', last);
     },
     keyUp(e) {
-        if (e.which === 39) {
+        const keycode = e.which || e.keycode;
+        if (keycode === 39 || keycode === 68 ) {
             this.next();
         }
 
-        if (e.which === 37) {
+        if (keycode === 37 || keycode === 65) {
             this.previous();
         }
     },
