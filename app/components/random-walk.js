@@ -7,16 +7,8 @@ export default Ember.Component.extend({
         this._super(...arguments);
         this.next();
     },
-    didRender() {
-        // Ember.$(document).keyUp(function(e) {
-            // console.log("key up on document ", e);
-        // });
-    },
     didInsertElement() {
-        var self = this;
-        $(document).on('keyup', {_self: this}, function(e) {
-            self.keyUp(e);
-        });
+        $(document).on('keyup', {_self: this}, this.keyUp.bind(this));
     },
     willDestroyElement() {
         $(document).off('keyup');
