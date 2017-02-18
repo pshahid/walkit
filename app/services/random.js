@@ -2,36 +2,53 @@ import Ember from 'ember';
 
 
 export default Ember.Service.extend({
-    randomSubreddits: null,
+    randomSubreddits: [],
     total: 0,
+    seen: new Set(),
     init() {
         this._super(...arguments);
-        this.set('randomSubreddits', []);
-        this.meta();
+        // this.meta();
     },
-    meta() {
+    meta(cb) {
+        console.log("Meta");
         var self = this;
         Ember.$.getJSON("http://localhost:8000/api/v1/subreddit?format=json").then(function(args) {
             self.set('total', args.meta.total_count);
+            cb();
         });
     },
     all() {
         console.log("Get all");
     },
-    random(cb) {
+    _random(cb) {
+        console.log("_random");
+        const length = this.get('total');
+        var seen = this.get('seen');
+        var index = 0;
+        do {
+            index = Math.floor(Math.random() * length);
+        } while (seen.has(index));
+
+        seen.add(index);
+        this.set('seen', seen);
+
+        Ember.$.getJSON(`http://localhost:8000/api/v1/subreddit/${index}/?format=json`).then(function(args) {
+            cb(args);
+        });
+    },
+    _ensure_total(cb) {
+        console.log("_ensure_total");
         const total = this.get('total');
         if (!total) {
-            console.log("No total!");
-            console.log(total);
-            this.meta();
+            this.meta(this._random.bind(this, cb));
+        } else {
+            this._random(cb);
         }
-        const length = total;
-        const index = Math.floor(Math.random() * length);
-        Ember.$.getJSON(`http://localhost:8000/api/v1/subreddit/${index}/?format=json`).then(function(args) {
-            console.log("RAndom!");
-            console.log(args);
-            cb(args);
-            console.log("Called callback");
-        });
+    },
+    _generate_random(total, cb) {
+
+    },
+    random(cb) {
+        this._ensure_total(cb);
     }
 });
