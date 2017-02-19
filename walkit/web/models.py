@@ -6,6 +6,7 @@ class Subreddit(models.Model):
     name = models.CharField(max_length=25, unique=True)
     public_description = models.TextField(max_length=1024, blank=True)
     sidebar_description = models.TextField(blank=True)
+    nsfw = models.BooleanField(default=False, blank=True)
     created_date = models.DateTimeField()
     subscribers = models.IntegerField()
     last_updated_date = models.DateTimeField(null=True, default=datetime(MINYEAR, 1, 1))

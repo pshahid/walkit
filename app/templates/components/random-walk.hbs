@@ -2,9 +2,9 @@
     <div class="ui items">
         <div class="item">
             <div class="content">
-                <a href="http://reddit.com/r/{{subreddit.name}}" target="_blank" class="header">r/{{subreddit.name}}</a>
+                <a onclick={{action "interested"}} href="http://reddit.com/r/{{subreddit.name}}" target="_blank" class="header">r/{{subreddit.name}}</a>
                 <div class="description">
-                    <p>{{subreddit.public_description}}</p>
+                    <p style="width:800px; margin-left: auto; margin-right: auto;">{{subreddit.public_description}}</p>
                     <div class="meta">
                         <span class="subs">{{subreddit.subscribers}} subscribers</span>
                     </div>
@@ -15,16 +15,28 @@
 </div>
 <div class="ui row">
         <div style="display: inline; padding-right: 6em;">
-            <a href="">
+            <a {{action "handlePrevious"}} href="#">
                 <i style="opacity: 0.7" class="huge violet left floated chevron left icon"></i>
             </a>
         </div>
         <button {{action "handleNext"}} class="ui massive violet button">Random Subreddit</button>
     <!-- <div class="ui column"> -->
         <div style="display: inline; padding-left: 6em;">
-            <a href="">
+            <a {{action "handleNext"}} href="#">
                 <i style="opacity: 0.7" class="huge violet right floated chevron right icon"></i>
             </a>
         </div>
     <!-- </div> -->
+</div>
+<div class="ui row">
+    <div class="ui statistics">
+        <div class="green statistic">
+            <div class="value">{{positive}}</div>
+            <div class="label">Interesting</div>
+        </div>
+        <div class="yellow statistic">
+            <div class="value">{{negative}}</div>
+            <div class="label">Not interesting</div>
+        </div>
+    </div>
 </div>

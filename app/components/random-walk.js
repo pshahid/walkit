@@ -2,7 +2,15 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     history: Ember.inject.service(),
+    interests: Ember.inject.service(),
     subreddit: {id: 0, name: '', url: '', description: ''},
+    positive: Ember.computed('interests', function() {
+        return this.get('interests').numPositive();
+    }),
+    negative: Ember.computed('interests', function() {
+        return this.get('interests').numNegative();
+    }),
+    sentiment: 'neutral',
     init() {
         this._super(...arguments);
         this.next();
@@ -44,6 +52,10 @@ export default Ember.Component.extend({
         },
         getSubreddit() {
             this.next();
+        },
+        interested() {
+            console.log("interested");
+            console.log(arguments);
         }
     }
 });
